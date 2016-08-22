@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-22T04:11:23.000Z</updated>
+  <updated>2016-08-22T04:13:29.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>iOS IM开发&lt;一&gt;-XMPP基础知识（2）</title>
-    <link href="http://yoursite.com/2016/08/21/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(2)/"/>
-    <id>http://yoursite.com/2016/08/21/iOS IM开发一XMPP基础知识(2)/</id>
-    <published>2016-08-21T02:12:33.000Z</published>
-    <updated>2016-08-22T04:11:23.000Z</updated>
+    <link href="http://yoursite.com/2015/06/30/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(2)/"/>
+    <id>http://yoursite.com/2015/06/30/iOS IM开发一XMPP基础知识(2)/</id>
+    <published>2015-06-30T04:44:20.000Z</published>
+    <updated>2016-08-22T04:13:29.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h2><h3 id="XMPPJID"><a href="#XMPPJID" class="headerlink" title="XMPPJID"></a>XMPPJID</h3><ul>
 <li><p>###XMPP中一个用户的账户ID就是一个JID。</p>
@@ -207,10 +207,10 @@
   
   <entry>
     <title>iOS IM开发&lt;一&gt;-XMPP基础知识（1）</title>
-    <link href="http://yoursite.com/2016/08/11/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(1)/"/>
-    <id>http://yoursite.com/2016/08/11/iOS IM开发一XMPP基础知识(1)/</id>
-    <published>2016-08-11T07:11:20.000Z</published>
-    <updated>2016-08-22T04:11:26.000Z</updated>
+    <link href="http://yoursite.com/2013/12/02/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(1)/"/>
+    <id>http://yoursite.com/2013/12/02/iOS IM开发一XMPP基础知识(1)/</id>
+    <published>2013-12-02T07:30:16.000Z</published>
+    <updated>2016-08-22T04:12:47.000Z</updated>
     
     <content type="html"><![CDATA[<h2>XMPP是什么? 有什么用?</h2>
 
