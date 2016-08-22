@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-22T08:09:19.000Z</updated>
+  <updated>2016-08-22T08:11:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2015/06/30/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(2)/"/>
     <id>http://yoursite.com/2015/06/30/iOS IM开发一XMPP基础知识(2)/</id>
     <published>2015-06-30T04:44:20.000Z</published>
-    <updated>2016-08-22T08:09:19.000Z</updated>
+    <updated>2016-08-22T08:11:35.000Z</updated>
     
     <content type="html"><![CDATA[<h2> 框架介绍</h2>
 
@@ -124,7 +124,7 @@
 <li>XMPPReconnect（重连模块）</li>
 </ul>
 <p>(1)  实例化重连模块，配置，激活</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> self.xmppReconnect = [[XMPPReconnect alloc] initWithDispatchQueue:dispatch_get_main_queue()];</div><div class="line"> // 添加代理</div><div class="line"> [self.xmppReconnect addDelegate:self delegateQueue:dispatch_get_main_queue()];</div><div class="line"> // 自动重连(默认是YES)</div><div class="line"> self.xmppReconnect.autoReconnect = YES;</div><div class="line"> // 连接延迟时间,当意外断开第一次发生时,在重连之前有一个延迟。默认值是DEFAULT_XMPP_RECONNECT_DELAY = 2.0s,要禁用此功能，</div><div class="line"> // 将值设置为零。</div><div class="line"> self.xmppReconnect.reconnectDelay = 1;</div><div class="line"> // 重连时间间隔, 一个重新连接的计时器可以选择性地用于尝试定期重新连接。定时器将在初始重新连接延迟后开始。默认值是</div><div class="line">// DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL = 20s,要禁用此功能，将值设置为零。</div><div class="line"> self.xmppReconnect.reconnectTimerInterval = 1;</div><div class="line"> // 使用以前连接的方法进行重连,默认是NO</div><div class="line"> self.xmppReconnect.usesOldSchoolSecureConnect = YES;</div><div class="line"> // 在xmppStream中激活重连模块</div><div class="line"> [self.xmppReconnect activate:_xmppStream];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">self.xmppReconnect = [[XMPPReconnect alloc] initWithDispatchQueue:dispatch_get_main_queue()];</div><div class="line">// 添加代理</div><div class="line">[self.xmppReconnect addDelegate:self delegateQueue:dispatch_get_main_queue()];</div><div class="line">// 自动重连(默认是YES)</div><div class="line">self.xmppReconnect.autoReconnect = YES;</div><div class="line">// 连接延迟时间,当意外断开第一次发生时,在重连之前有一个延迟。默认值是DEFAULT_XMPP_RECONNECT_DELAY = 2.0s,要禁用此功能，</div><div class="line">// 将值设置为零。</div><div class="line">self.xmppReconnect.reconnectDelay = 1;</div><div class="line">// 重连时间间隔, 一个重新连接的计时器可以选择性地用于尝试定期重新连接。定时器将在初始重新连接延迟后开始。默认值是</div><div class="line">// DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL = 20s,要禁用此功能，将值设置为零。</div><div class="line">self.xmppReconnect.reconnectTimerInterval = 1;</div><div class="line">// 使用以前连接的方法进行重连,默认是NO</div><div class="line">self.xmppReconnect.usesOldSchoolSecureConnect = YES;</div><div class="line">// 在xmppStream中激活重连模块</div><div class="line">[self.xmppReconnect activate:_xmppStream];</div></pre></td></tr></table></figure>
 <p>(2)  其他方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// 当不使用自动重连时,这个方法被用于手动开始重连进程,比如说使用网络监控去初始化XMPP连接,或者重连在非常有限的情况下，手动控制</div><div class="line">// 更为适合。调用此方法后，可以让后面的断开连接后不再继续重连。这只适用于流已经开启的时候,再开启手动重连,那么如果先开启手动重连,</div><div class="line">// 再去开启流,是不会影响连接的自动重连.这个方法在流断开时并不会做任何事。</div><div class="line">[self.xmppReconnect manualStart];</div><div class="line">// 停止当前的重新连接过程,这个方法将停止当前的重新连接过程,不论是自动重连还是手动重连,停止重新连接过程不会阻止以后的自动重新连接</div><div class="line">// 或者以后的手动重连,它只停止当前的重新连接过程,如果属性启用,autoreconnect属性仍然启用，认证或者意外断开连接，此类将仍然尝</div><div class="line">// 试一个自动重新连接。</div><div class="line">[self.xmppReconnect stop];</div></pre></td></tr></table></figure>
 <p>(3)  代理</p>
