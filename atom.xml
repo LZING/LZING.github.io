@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-22T08:38:29.000Z</updated>
+  <updated>2016-08-22T08:39:19.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2015/06/30/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(2)/"/>
     <id>http://yoursite.com/2015/06/30/iOS IM开发一XMPP基础知识(2)/</id>
     <published>2015-06-30T04:44:20.000Z</published>
-    <updated>2016-08-22T08:38:29.000Z</updated>
+    <updated>2016-08-22T08:39:19.000Z</updated>
     
     <content type="html"><![CDATA[<h2> 框架介绍</h2>
 
@@ -102,7 +102,7 @@
       </em> xa -&gt;  该用户要离开相当长时间(xa = “extended Away”，长时间离开).(离开了很久)<br><br>3. <h3>status（自定义文字状态）</h3><br>     <em> 可选的<status>元素包含了自然人可读的定义实体可用性的自然语言描述的XML字符数据. 通常在出席信息节不包含’type’属性的时候被用于和show元素结合一起提供某个可用性状态的细节(例如, “In a meeting”，”开会中”).<br><br><h3>XMPPModule(模块)</h3>
    </status></em> 各种功能模块的基类，继承它的模块均需在xmppStream中激活，可添加多个委托实例<br><br><h3>XMPPElement(元素)</h3><br>   <em> XML基本元素/stanza<br><br><h3>XMPPParser(解析器)</h3>
    </em> XML解析<br><br><h3>XMPPLogging(日志)</h3><br>   <em> XMPP的日志框架<br><br><h3>XMPPInternal(核心)</h3>
-   </em> 整个XMPP框架内部使用的核心和高级底层内容<br>—<br><h2>通信过程</h2><br>   1. 服务器绑定/监听端口(一般是5222)<br>   2. 客户端连接到该socket地址<br>   3. 客户端发送初始XML<br>   4. 服务器返回初始XML<br>   5. 服务器回应支持的特性(features) 加密算法类型(可能还有注册\压缩方法\登陆验证)<br>   6. 如果客户端长时间不回应，发送ping节点询问客户端是否安好，若客户端也不回应，强制断开socket连接(闲置断开时间可在服务器管理后台配置)<br>   7. 客户端从上述加密算法类型中选择一种方式进行用户认证(XMPP握手)，如果是登陆，则文本内容需加上用户名密码拼接成的加密内容<br>   8. 若客户端选择的加密方式不是PLAIN,服务器会发送一段加密挑战(challenge),客户端成功完成挑战才能进行登陆<br>   9. 服务器返回认证结果<br>   10. 客户端再次发送初始化XML<br>   11. 再次返回特性，不再包括加密类型列表，多出了资源绑定(bind)节点/session(会话)节点<br>   12. 客户端发送set-IQ流进行资源绑定<br>   13. 服务器将前面中的id属性与客户端发送的资源名做绑定,并返回一个result-IQ流<br>   14. 客户端发送set-IQ流进行会话绑定<br>   15. 服务器进行session绑定,并返回result-IQ流<br>   16. 客户端发送出席节点、请求roster信息等<br>   17. 服务器返回该客户端的出席信息与自己好友的出席信息<br>—<br><h2>基本使用</h2><br><br><h3>连接</h3>
+   </em> 整个XMPP框架内部使用的核心和高级底层内容<br>—<br><h2>通信过程</h2><br>   1. 服务器绑定/监听端口(一般是5222)<br>   2. 客户端连接到该socket地址<br>   3. 客户端发送初始XML<br>   4. 服务器返回初始XML<br>   5. 服务器回应支持的特性(features) 加密算法类型(可能还有注册\压缩方法\登陆验证)<br>   6. 如果客户端长时间不回应，发送ping节点询问客户端是否安好，若客户端也不回应，强制断开socket连接(闲置断开时间可在服务器管理后台配置)<br>   7. 客户端从上述加密算法类型中选择一种方式进行用户认证(XMPP握手)，如果是登陆，则文本内容需加上用户名密码拼接成的加密内容<br>   8. 若客户端选择的加密方式不是PLAIN,服务器会发送一段加密挑战(challenge),客户端成功完成挑战才能进行登陆<br>   9. 服务器返回认证结果<br>   10. 客户端再次发送初始化XML<br>   11. 再次返回特性，不再包括加密类型列表，多出了资源绑定(bind)节点/session(会话)节点<br>   12. 客户端发送set-IQ流进行资源绑定<br>   13. 服务器将前面中的id属性与客户端发送的资源名做绑定,并返回一个result-IQ流<br>   14. 客户端发送set-IQ流进行会话绑定<br>   15. 服务器进行session绑定,并返回result-IQ流<br>   16. 客户端发送出席节点、请求roster信息等<br>   17. 服务器返回该客户端的出席信息与自己好友的出席信息<br><br>—<br><h2>基本使用</h2><br><br><h3>连接</h3>
 
 <ul>
 <li>一切的通信都基于XML流, 必须先建立起XMPPStream，需要指定要连接到的服务器主机地址以及对于的端口</li>
