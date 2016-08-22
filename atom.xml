@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-22T06:24:02.000Z</updated>
+  <updated>2016-08-22T06:25:10.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2015/06/30/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(2)/"/>
     <id>http://yoursite.com/2015/06/30/iOS IM开发一XMPP基础知识(2)/</id>
     <published>2015-06-30T04:44:20.000Z</published>
-    <updated>2016-08-22T06:24:02.000Z</updated>
+    <updated>2016-08-22T06:25:10.000Z</updated>
     
     <content type="html"><![CDATA[<h2> 框架介绍</h2>
 
@@ -176,7 +176,7 @@
 <p>(2)  其他方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 当不使用自动重连时,这个方法被用于手动开始重连进程,比如说使用网络监控去初始化XMPP连接,或者重连在非常有限的情况下，手动控制</div><div class="line">// 更为适合。调用此方法后，可以让后面的断开连接后不再继续重连。这只适用于流已经开启的时候,再开启手动重连,那么如果先开启手动重连,</div><div class="line">// 再去开启流,是不会影响连接的自动重连.这个方法在流断开时并不会做任何事。</div><div class="line">[self.xmppReconnect manualStart];</div><div class="line">// 停止当前的重新连接过程,这个方法将停止当前的重新连接过程,不论是自动重连还是手动重连,停止重新连接过程不会阻止以后的自动重新连接</div><div class="line">// 或者以后的手动重连,它只停止当前的重新连接过程,如果属性启用,autoreconnect属性仍然启用，认证或者意外断开连接，此类将仍然尝</div><div class="line">// 试一个自动重新连接。</div><div class="line">[self.xmppReconnect stop];</div></pre></td></tr></table></figure>
 <p>(3)  代理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#pragma mark - &lt;XMPPReconnectDelegate&gt;</div><div class="line">//  检测到意外的断开连接</div><div class="line">- (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkReachabilityFlags)connectionFlags ;</div><div class="line">//  是否阻止自动重连</div><div class="line">- (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkReachabilityFlags)reachabilityFlags ;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#pragma mark - &lt;XMPPReconnectDelegate&gt;</div><div class="line">//  检测到意外的断开连接</div><div class="line">- (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkReachabilityFlags)connectionFlags;</div><div class="line">//  是否阻止自动重连</div><div class="line">- (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkReachabilityFlags)reachabilityFlags;</div></pre></td></tr></table></figure>
 <ul>
 <li>XMPPRoster（花名册模块，也就是好友列表）<br>(1)  实例化重连模块，配置，激活</li>
 </ul>
@@ -334,7 +334,7 @@
 </ul>
 </li>
 <li><p></p><h3>XXMPP三大节点 </h3><p></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. XMPPPresence:出席 &lt;presence/&gt;</div><div class="line">2. XMPPMessage:消息&lt;message/&gt;</div><div class="line">3. XMPPIQ:信息请求（info query）&lt;iq/&gt;</div></pre></td></tr></table></figure>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. XMPPPresence:出席 <span class="tag">&lt;<span class="name">presence</span>/&gt;</span></div><div class="line">2. XMPPMessage:消息<span class="tag">&lt;<span class="name">message</span>/&gt;</span></div><div class="line">3. XMPPIQ:信息请求（info query）<span class="tag">&lt;<span class="name">iq</span>/&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p></p><h3> XMPP集成</h3><p></p>
