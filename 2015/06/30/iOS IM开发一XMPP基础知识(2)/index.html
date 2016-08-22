@@ -173,12 +173,20 @@
 
 </li>
 </ul>
-<h3> XMPPStream（流）</h3><br>* <h3>XML流，里面的方法和协议都非常重要，包括连接XMPP服务器，登陆，注销，设置端口，消息的发送和接收，出席状态的改变，激活模块（比如心跳模块，花名册模块）都是要依靠这个XMPPStream才能实现</h3>
-
-<h3> XMPPIQ（节点）</h3><br>* <h3>查询节点 Info/Query的缩写 类似于HTTP请求</h3>
+<h3> XMPPStream（流）</h3>
 
 <ul>
-<li><h3>type属性值：</h3><ol>
+<li><h3>XML流，里面的方法和协议都非常重要，包括连接XMPP服务器，登陆，注销，设置端口，消息的发送和接收，出席状态的改变，激活模块（比如心跳模块，花名册模块）都是要依靠这个XMPPStream才能实现</h3>
+
+</li>
+</ul>
+<h3> XMPPIQ（节点）</h3>
+
+<ul>
+<li><h3>查询节点 Info/Query的缩写 类似于HTTP请求</h3>
+</li>
+<li><p></p><h3>type属性值：</h3><p></p>
+<ol>
 <li>get</li>
 <li>set</li>
 <li>result服务器的响应</li>
@@ -186,9 +194,11 @@
 </ol>
 </li>
 </ul>
-<h3> XMPPMessage（消息）</h3><br>1. <h3>id（可选标识符）</h3>
+<h3> XMPPMessage（消息）</h3>
 
 <ol>
+<li><h3>id（可选标识符）</h3>
+</li>
 <li><h3>from（发送者）</h3>
 </li>
 <li><h3>to（接收者）</h3>
@@ -261,7 +271,7 @@
 <li>整个XMPP框架内部使用的核心和高级底层内容</li>
 </ul>
 <hr>
-<h2>通信过程</h2><br>   1. 服务器绑定/监听端口(一般是5222)<br>   2. 客户端连接到该socket地址<br>   3. 客户端发送初始XML<br>   4. 服务器返回初始XML<br>   5. 服务器回应支持的特性(features) 加密算法类型(可能还有注册\压缩方法\登陆验证)<br>   6. 如果客户端长时间不回应，发送ping节点询问客户端是否安好，若客户端也不回应，强制断开socket连接(闲置断开时间可在服务器管理后台配置)<br>   7. 客户端从上述加密算法类型中选择一种方式进行用户认证(XMPP握手)，如果是登陆，则文本内容需加上用户名密码拼接成的加密内容<br>   8. 若客户端选择的加密方式不是PLAIN,服务器会发送一段加密挑战(challenge),客户端成功完成挑战才能进行登陆<br>   9. 服务器返回认证结果<br>   10. 客户端再次发送初始化XML<br>   11. 再次返回特性，不再包括加密类型列表，多出了资源绑定(bind)节点/session(会话)节点<br>   12. 客户端发送set-IQ流进行资源绑定<br>   13. 服务器将前面中的id属性与客户端发送的资源名做绑定,并返回一个result-IQ流<br>   14. 客户端发送set-IQ流进行会话绑定<br>   15. 服务器进行session绑定,并返回result-IQ流<br>   16. 客户端发送出席节点、请求roster信息等<br>   17. 服务器返回该客户端的出席信息与自己好友的出席信息<br><br><br>—<br><h2>基本使用</h2>
+<h2>通信过程</h2><br>   1. 服务器绑定/监听端口(一般是5222)<br>   2. 客户端连接到该socket地址<br>   3. 客户端发送初始XML<br>   4. 服务器返回初始XML<br>   5. 服务器回应支持的特性(features) 加密算法类型(可能还有注册\压缩方法\登陆验证)<br>   6. 如果客户端长时间不回应，发送ping节点询问客户端是否安好，若客户端也不回应，强制断开socket连接(闲置断开时间可在服务器管理后台配置)<br>   7. 客户端从上述加密算法类型中选择一种方式进行用户认证(XMPP握手)，如果是登陆，则文本内容需加上用户名密码拼接成的加密内容<br>   8. 若客户端选择的加密方式不是PLAIN,服务器会发送一段加密挑战(challenge),客户端成功完成挑战才能进行登陆<br>   9. 服务器返回认证结果<br>   10. 客户端再次发送初始化XML<br>   11. 再次返回特性，不再包括加密类型列表，多出了资源绑定(bind)节点/session(会话)节点<br>   12. 客户端发送set-IQ流进行资源绑定<br>   13. 服务器将前面中的id属性与客户端发送的资源名做绑定,并返回一个result-IQ流<br>   14. 客户端发送set-IQ流进行会话绑定<br>   15. 服务器进行session绑定,并返回result-IQ流<br>   16. 客户端发送出席节点、请求roster信息等<br>   17. 服务器返回该客户端的出席信息与自己好友的出席信息<br><br><br>——-<br><h2>基本使用</h2>
 
 <p></p><h3>连接</h3><p></p>
 <ul>
@@ -272,7 +282,7 @@
 <p>(2)将流和服务器连接(流要指定JID)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 连接服务器 JID格式：用户名@服务器域名</div><div class="line">NSString *jidString = [NSString stringWithFormat:@&quot;%@@%@&quot;,@&quot;anonymous&quot;,YSX_XMPP_Domian];</div><div class="line">// 此处jid设置了一个随意值 但是不能为空</div><div class="line">[_xmppStream setMyJID:[XMPPJID jidWithString:jidString]];</div><div class="line">// 设置连接的服务器,注意现在主机不能使用ip,否则不满足ipv6的需求,会被拒</div><div class="line">[_xmppStream setHostName:host];</div><div class="line">// 设置端口</div><div class="line">[_xmppStream setHostPort:YSX_Host_Port];</div><div class="line">// 连接服务器</div><div class="line">NSError *error = nil;</div><div class="line">[_xmppStream connectWithTimeout:10 error:&amp;error];</div></pre></td></tr></table></figure>
 <p>(3) 连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">    // 连接服务器</div><div class="line">    NSError *error = nil;</div><div class="line">    [_xmppStream connectWithTimeout:10 error:&amp;error];</div><div class="line">```     </div><div class="line"></div><div class="line">(4) 连接服务器认证</div><div class="line"></div><div class="line">```Objective-C</div><div class="line"> 	#pragma mark - &lt;XMPPStreamDelegate&gt;</div><div class="line">	//  连接上socket,经历三次握手</div><div class="line">	- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket ;</div><div class="line"></div><div class="line">	//  连接服务器成功</div><div class="line">	- (void)xmppStreamDidConnect:(XMPPStream *)sender ;</div><div class="line"></div><div class="line">	//  连接服务器失败</div><div class="line">	- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error ;</div><div class="line"></div><div class="line">	//  连接服务器超时</div><div class="line">	- (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender ;</div><div class="line"></div><div class="line">	//  将要连接服务器</div><div class="line">	- (void)xmppStreamWillConnect:(XMPPStream *)sender ;</div><div class="line"></div><div class="line">	//  被用于鉴定断开服务器连接是否有效还是产生了错误导致断开,当断开服务器时调用</div><div class="line">	- (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender;</div><div class="line">```     </div><div class="line">&lt;h3&gt;注册/登录&lt;/h3&gt;</div><div class="line"></div><div class="line">(1) 注册</div><div class="line"></div><div class="line">```Objective-C</div><div class="line">	// 在服务器上使用用户名和密码注册一个新用户,会返回是否注册成功,在内部实现是注册一个元素节点,</div><div class="line">	// 当流没有连接,或者注册服务不可用时,这个方法不做任何事</div><div class="line">	[_xmppStream setMyJID:[XMPPJID jidWithString:account]];</div><div class="line">	[_xmppStream registerWithPassword:password error:&amp;error];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">    // 连接服务器</div><div class="line">    NSError *error = nil;</div><div class="line">    [_xmppStream connectWithTimeout:10 error:&amp;error];</div><div class="line">```     </div><div class="line"></div><div class="line">(4) 连接服务器认证</div><div class="line"></div><div class="line">```Objective-C</div><div class="line"> 	#pragma mark - &lt;XMPPStreamDelegate&gt;</div><div class="line">	//  连接上socket,经历三次握手</div><div class="line">	- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket ;</div><div class="line"></div><div class="line">	//  连接服务器成功</div><div class="line">	- (void)xmppStreamDidConnect:(XMPPStream *)sender ;</div><div class="line"></div><div class="line">	//  连接服务器失败</div><div class="line">	- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error ;</div><div class="line"></div><div class="line">	//  连接服务器超时</div><div class="line">	- (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender ;</div><div class="line"></div><div class="line">	//  将要连接服务器</div><div class="line">	- (void)xmppStreamWillConnect:(XMPPStream *)sender ;</div><div class="line"></div><div class="line">	//  被用于鉴定断开服务器连接是否有效还是产生了错误导致断开,当断开服务器时调用</div><div class="line">	- (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender;</div><div class="line">```     </div><div class="line"></div><div class="line">&lt;h3&gt;注册/登录&lt;/h3&gt;</div><div class="line"></div><div class="line">(1) 注册</div><div class="line"></div><div class="line">```Objective-C</div><div class="line">	// 在服务器上使用用户名和密码注册一个新用户,会返回是否注册成功,在内部实现是注册一个元素节点,</div><div class="line">	// 当流没有连接,或者注册服务不可用时,这个方法不做任何事</div><div class="line">	[_xmppStream setMyJID:[XMPPJID jidWithString:account]];</div><div class="line">	[_xmppStream registerWithPassword:password error:&amp;error];</div></pre></td></tr></table></figure>
 <p>(2) 注册回调(代理)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 这个方法会在注册成功时调用</div><div class="line">- (void)xmppStreamDidRegister:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 这个方法会在注册失败时调用, 如果错误码是 409, 说明这个用户已经注册</div><div class="line">- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error;</div><div class="line">// 错误码可以这样去获取</div><div class="line">	NSString *errorCode = [[[error elementForName:@&quot;error&quot;] attributeForName:@&quot;code&quot;] stringValue]</div></pre></td></tr></table></figure>
 <p>(3) 登录</p>
