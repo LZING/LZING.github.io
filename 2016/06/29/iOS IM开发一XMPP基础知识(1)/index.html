@@ -1,330 +1,157 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
+    <title>iOS IM开发&lt;一&gt;-XMPP基础知识（1） | We are uniquecoder</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="爱好电影、音乐和书籍，尤其周杰伦。擅长Objective-C，熟悉swift,html5,css3,JavaScript。">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="iOS IM开发&lt;一&gt;-XMPP基础知识（1） | We are uniquecoder">
+    <meta name="twitter:description" content="爱好电影、音乐和书籍，尤其周杰伦。擅长Objective-C，熟悉swift,html5,css3,JavaScript。">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="iOS IM开发&lt;一&gt;-XMPP基础知识（1） | We are uniquecoder">
+    <meta property="og:description" content="爱好电影、音乐和书籍，尤其周杰伦。擅长Objective-C，熟悉swift,html5,css3,JavaScript。">
+
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+    <meta name="author" content="萌萌哒iOS工程师刘梓颖">
     
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
     
-    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+    <link rel="icon" href="/images/favicon.png">
+    
 
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="We are uniquecoder" href="/atom.xml">
+    
 
+    <link rel="canonical" href="http://yoursite.com/2016/06/29/iOS IM开发一XMPP基础知识(1)/"/>
 
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="iOS," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="We are uniquecoder" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="XMPP是什么? 有什么用?
-
- XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 
-
-
- XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天协议。 
-
-  XMPP的前身是Jabber，一个开源形式组织产生的网络即时通信协议。XMPP目前被">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS IM开发<一>-XMPP基础知识（1）">
-<meta property="og:url" content="http://yoursite.com/2016/06/29/iOS IM开发一XMPP基础知识(1)/index.html">
-<meta property="og:site_name" content="We are uniquecoder">
-<meta property="og:description" content="XMPP是什么? 有什么用?
-
- XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 
-
-
- XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天协议。 
-
-  XMPP的前身是Jabber，一个开源形式组织产生的网络即时通信协议。XMPP目前被">
-<meta property="og:image" content="http://o7gqkucyn.bkt.clouddn.com/d000baa1cd11728b45647b06cafcc3cec3fd2c4c%20%281%29.jpg">
-<meta property="og:image" content="http://o7gqkucyn.bkt.clouddn.com/D039B2B7-B068-4790-A6E9-8622145E2301.png">
-<meta property="og:image" content="http://o7gqkucyn.bkt.clouddn.com/9FE6DF2B-EE6D-465E-A921-0F8692784866.png">
-<meta property="og:image" content="http://o7gqkucyn.bkt.clouddn.com/bitcode.png">
-<meta property="og:image" content="http://i.stack.imgur.com/uwKak.jpg">
-<meta property="og:updated_time" content="2016-08-22T10:53:35.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS IM开发<一>-XMPP基础知识（1）">
-<meta name="twitter:description" content="XMPP是什么? 有什么用?
-
- XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 
-
-
- XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天协议。 
-
-  XMPP的前身是Jabber，一个开源形式组织产生的网络即时通信协议。XMPP目前被">
-<meta name="twitter:image" content="http://o7gqkucyn.bkt.clouddn.com/d000baa1cd11728b45647b06cafcc3cec3fd2c4c%20%281%29.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 6666666,
-      author: '博主'
-    }
-  };
-</script>
-
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2016/06/29/iOS IM开发一XMPP基础知识(1)/"/>
-
-  <title> iOS IM开发<一>-XMPP基础知识（1） | We are uniquecoder </title>
+    
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body class="home-template no-js">
 
-  
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
 
-
-
-
-
-
-
-
-
-
-  
-  
     
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 We are uniquecoder 的主页"><img src="/images/logo2.jpg" width="80" alt="We are uniquecoder logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for We are uniquecoder">We are uniquecoder</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">Ken‘s blog</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">学无止境,努力争当全栈,路还远一步一步走,第一步iOS已经走了过半,接下来是前端了,目前在做直播</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+              <li class="navigation__item"><a href="/projects">项目作品</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
   
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">We are uniquecoder</span>
-      <span class="logo-line-after"><i></i></span>
+  <li class="navigation__item">
+    <a href="http://weibo.com/u/2358535205/home?wvr=5&amp;lf=reg" title="我的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
     </a>
-  </div>
-  <p class="site-subtitle">Ken‘s blog</p>
-</div>
+  </li> 
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
 
-<nav class="site-nav">
+  <!-- Github -->
   
+  <li class="navigation__item">
+    <a href="https://github.com/LZING" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
 
-  
-    <ul id="menu" class="menu">
-      
+
+<!-- Stack Overflow -->
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-    </ul>
+  <!-- Google Plus -->
   
 
+<!-- Facebook -->
+
   
+<!-- Twitter -->
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
 </nav>
 
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS IM开发<一>-XMPP基础知识（1）
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T14:21:37+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
 
+      </div>
 
-    <div class="post-body" itemprop="articleBody">
+    </div>
 
-      
-      
+    <div class="panel-cover--overlay cover-blue"></div>
+  </div>
+</header>
 
-      
-        <h2>XMPP是什么? 有什么用?</h2>
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2016-06-29T06:21:37.000Z" class="post-list__meta--date date">2016-06-29</time> &#8226; <span class="post-meta__tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS/">iOS</a>
+</span>
+    </div>
+    <h1 class="post-title">iOS IM开发&lt;一&gt;-XMPP基础知识（1）</h1>
+  </header>
+
+  <section class="post">
+    <h2>XMPP是什么? 有什么用?</h2>
 
 <h3> XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 </h3>
 
@@ -457,312 +284,42 @@
 </li>
 </ul>
 
-      
-    </div>
+  </section>
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/29/iOS IM开发一XMPP基础知识(2)/" rel="prev" title="iOS IM开发<一>-XMPP基础知识（2）">
-                iOS IM开发<一>-XMPP基础知识（2） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
+</article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2016 - 本站由 <a href="/">@Longbo Ma</a> 创建,
+        使用<a href="https://github.com/lenbo-ma/hexo-theme-vno">hexo-theme-vno</a>主题,
+        修改自<a href="http://github.com/onevcat/vno" target="_blank">Vno</a>
+    </span>
+</footer>
 
         </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-  </div>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
 
-      
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="萌萌哒iOS工程师刘梓颖" />
-          <p class="site-author-name" itemprop="name">萌萌哒iOS工程师刘梓颖</p>
-          <p class="site-description motion-element" itemprop="description">学无止境,努力争当全栈,路还远一步一步走,第一步iOS已经走了过半,接下来是前端了,目前在做直播</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/LZING" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/2358535205/home?wvr=5&lf=reg" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">XMPP是什么? 有什么用?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text"> XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text"> XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天协议。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">  XMPP的前身是Jabber，一个开源形式组织产生的网络即时通信协议。XMPP目前被IETF国际标准组织完成了标准化工作。标准化的核心结果分为两部分: </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 核心的XML流传输协议，可用于服务类实时通讯、表示和需求响应服务中的XML数据元流式传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.2.</span> <span class="nav-text">基于XML流传输的即时通讯扩展应用，用于即时消息（IM）以及在线现场探测</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">我们学习XMPP的可以去 XMPP中文翻译计划或者XMPP官方网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text"> socket基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text"> XMPP主要是使用socket，那socket我们通常又称为套接字，网络上的两个程序通过一个双向的通信连接接口来实现数据的交换，那么两端分别各有一个socket，是绑定端口的，便于识别应用程序。使用socket，可以只传送数据本身而不用进行XML封装，大大降低数据传输的开销(JSON)，而且允许应用程序运行在异步模式（提高效率），只有在需要的时候才接收数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.</span> <span class="nav-text"> 相信我们大学也学过网络的OSI参考模型，分为七层，那我们移动端主要有五层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.1.</span> <span class="nav-text"> 应用层： 终端应用，在手机上就是我们的APP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.2.</span> <span class="nav-text">传输层：传输数据协议与端口，TCP传输控制协议和UDP数据报文协议为主，通过端口号可以找到相应APP，有效端口为0~65535，但是系统使用或者保留端口为1~1024，所以我们尽量不会去使用它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.3.</span> <span class="nav-text">网络层：路由与节点，确保数据传输，也就是IP地址，每一台主机都有IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.4.</span> <span class="nav-text">数据链路层：从物理层接受的数据进行MAC地址封装与解封，主要是由网卡和交换机构成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.5.</span> <span class="nav-text">物理层：利用物理传输介质为数据链路层提供物理连接，以便透明的传送比特流。常用设备有集线器、中继器、调制解调器、网线。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.</span> <span class="nav-text">从图中可以看出socket主要是在应用层跟传输层之间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.9.</span> <span class="nav-text"> socket长、短连接&心跳包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.10.</span> <span class="nav-text">短连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.11.</span> <span class="nav-text">长连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.12.</span> <span class="nav-text">心跳包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.13.</span> <span class="nav-text"> socket类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.14.</span> <span class="nav-text">SOCK_STREAM（流式socket）：面向连接，使用TCP协议，使用NSStream收发数据     开发步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.15.</span> <span class="nav-text"> SOCK_DGRAM（数据报式socket）：无连接，使用UPD协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.16.</span> <span class="nav-text"> XMPP主要基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.17.</span> <span class="nav-text">XXMPP基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.18.</span> <span class="nav-text">XXMPP工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.19.</span> <span class="nav-text">XXMPP传输内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.19.1.</span> <span class="nav-text">XMPP是一种类似于HTTP协议的一种数据传输协议，其过程就如同“解包装–〉包装”的过程。只需要理解其接收的类型及返回的类型，便可以很好的利用XMPP来进行数据通讯</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.20.</span> <span class="nav-text">XXMPP三大节点 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.21.</span> <span class="nav-text"> XMPP集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.21.1.</span> <span class="nav-text">一般都会使用Openfire搭建服务器，使用Spark来调试XMPP，这方面不多说，这里主要说iOS集成。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.22.</span> <span class="nav-text">使用cocoapods集成 pod ‘XMPPFramework’，注意pod的XMPP是不包含XEP-XXXX扩展框架，需要自行另外导入pod ‘XMPPFramework/XEP-0045’,但是好处是导入后可以直接使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.23.</span> <span class="nav-text">直接导入框架，编译报错，解决：</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">萌萌哒iOS工程师刘梓颖</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+	ga('create', 'UA-42596364-1', 'auto');
+	ga('send', 'pageview');
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
