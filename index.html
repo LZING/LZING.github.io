@@ -240,6 +240,128 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/29/iOS IM开发一XMPP基础知识(3)/" itemprop="url">
+                  iOS IM开发<一>-XMPP基础知识（3）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-29T17:44:25+08:00" content="2016-06-29">
+              2016-06-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code class="objc"><span class="comment">//  //  * XMPPRoom（聊天室）1</span>
+<span class="comment">//(2) 实例化心跳模块，配置，激活</span>
+
+    <span class="comment">// 2. 代理</span>
+
+ <span class="comment">//  * XMPPPubSub（公共订阅）</span>
+<span class="comment">//     1. 实例化心跳模块，配置，激活</span>
+
+   <span class="comment">//  2. 代理</span>
+</code></pre>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/29/iOS IM开发一XMPP基础知识(2)/" itemprop="url">
                   iOS IM开发<一>-XMPP基础知识（2）
                 </a>
@@ -411,7 +533,7 @@
 <li>一切的通信都基于XML流, 必须先建立起XMPPStream，需要指定要连接到的服务器主机地址以及对于的端口</li>
 </ul>
 <p>(1)实例化</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 实例化</span></div><div class="line"> _xmppStream = [[XMPPStream alloc]init];</div><div class="line"> <span class="comment">// 此处代理相当于socket的代理</span></div><div class="line"> [_xmppStream addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 实例化</span></div><div class="line">_xmppStream = [[XMPPStream alloc]init];</div><div class="line"><span class="comment">// 此处代理相当于socket的代理</span></div><div class="line"> [_xmppStream addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
 <p>(2)将流和服务器连接(流要指定JID)</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 连接服务器 JID格式：用户名@服务器域名</span></div><div class="line"><span class="built_in">NSString</span> *jidString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%@"</span>,<span class="string">@"anonymous"</span>,YSX_XMPP_Domian];</div><div class="line"><span class="comment">// 此处jid设置了一个随意值 但是不能为空</span></div><div class="line">[_xmppStream setMyJID:[XMPPJID jidWithString:jidString]];</div><div class="line"><span class="comment">// 设置连接的服务器,注意现在主机不能使用ip,否则不满足ipv6的需求,会被拒</span></div><div class="line">[_xmppStream setHostName:host];</div><div class="line"><span class="comment">// 设置端口</span></div><div class="line">[_xmppStream setHostPort:YSX_Host_Port];</div><div class="line"><span class="comment">// 连接服务器</span></div><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line">[_xmppStream connectWithTimeout:<span class="number">10</span> error:&amp;error];</div></pre></td></tr></table></figure>
 <p>(3) 连接</p>
@@ -454,128 +576,6 @@
 <figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 从服务器中手动匹配花名册</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster fetchRoster];</div><div class="line"><span class="built_in">NSString</span> *jidString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%@"</span>,<span class="string">@"anonymous"</span>,YSX_XMPP_Domian];</div><div class="line">XMPPJID *user = [XMPPJID jidWithString:jidString];</div><div class="line"><span class="comment">// 添加好友到花名册</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster addUser:user withNickname:<span class="literal">nil</span>];</div><div class="line"><span class="comment">// 添加好友到花名册和组</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster addUser:user withNickname:<span class="literal">nil</span> groups:@[]];</div><div class="line"><span class="comment">// 添加好友到花名册和组并且订阅他们的出席状态</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster addUser:user withNickname:<span class="literal">nil</span> groups:@[] subscribeToPresence:<span class="literal">YES</span>];</div><div class="line"><span class="comment">// 给jid设置一个昵称</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster setNickname:<span class="string">@"anonymous"</span> forUser:user];</div><div class="line"><span class="comment">// 从花名册移除好友,并且才取消订阅出席状态,移除对方接收我们出席状态的权限</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster removeUser:user];</div><div class="line"><span class="comment">// 订阅用户出席状态</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster subscribePresenceToUser:user];</div><div class="line"><span class="comment">// 取消订阅用户出席状态</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster unsubscribePresenceFromUser:user];</div><div class="line"><span class="comment">// 移除对方接收我们出席状态的权限</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster revokePresencePermissionFromUser:user];</div><div class="line"><span class="comment">// 允许对方接收我们出席状态的权限而且是否添加要花名册</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster acceptPresenceSubscriptionRequestFrom:user andAddToRoster:<span class="literal">YES</span>];</div><div class="line"><span class="comment">// 拒绝对方订阅我们出席状态的权限</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster rejectPresenceSubscriptionRequestFrom:user];</div></pre></td></tr></table></figure>
 <p>(4) 代理</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 接收到好友订阅请求,在这个代理方法里可以调用acceptPresenceSubscriptionRequestFrom: </span></div><div class="line"><span class="comment">// rejectPresenceSubscriptionRequestFrom: 来接收或者拒绝订阅好友请求</span></div><div class="line">- (<span class="keyword">void</span>)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence &#123;</div><div class="line"><span class="comment">// 手动接受,From:要接受谁的订阅请求 AddToRoster:是否添加到花名册</span></div><div class="line">    [sender acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:<span class="literal">YES</span>];</div><div class="line">&#125;</div><div class="line"><span class="comment">//  好友关系发生改变,订阅情况发生改变</span></div><div class="line">- (<span class="keyword">void</span>)xmppRoster:(XMPPRoster *)sender didReceiveRosterPush:(XMPPIQ *)iq;</div><div class="line"><span class="comment">//  开始填充花名册</span></div><div class="line">- (<span class="keyword">void</span>)xmppRosterDidBeginPopulating:(XMPPRoster *)sender;</div><div class="line"><span class="comment">//  结束填充花名册</span></div><div class="line">- (<span class="keyword">void</span>)xmppRosterDidEndPopulating:(XMPPRoster *)sender;</div><div class="line"><span class="comment">//  接收到了item实例</span></div><div class="line">- (<span class="keyword">void</span>)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(<span class="built_in">NSXMLElement</span> *)item;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/29/iOS IM开发一XMPP基础知识(3)/" itemprop="url">
-                  iOS IM开发<一>-XMPP基础知识（3）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T17:44:25+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code class="objc"><span class="comment">//  //  * XMPPRoom（聊天室）1</span>
-<span class="comment">//(2) 实例化心跳模块，配置，激活</span>
-
-    <span class="comment">// 2. 代理</span>
-
- <span class="comment">//  * XMPPPubSub（公共订阅）</span>
-<span class="comment">//     1. 实例化心跳模块，配置，激活</span>
-
-   <span class="comment">//  2. 代理</span>
-</code></pre>
 
           
         
