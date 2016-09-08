@@ -264,8 +264,8 @@
 <ul>
 <li>一切的通信都基于XML流, 必须先建立起XMPPStream，需要指定要连接到的服务器主机地址以及对于的端口</li>
 </ul>
-<p>(1)实例化</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 实例化</span></div><div class="line"> _xmppStream = [[XMPPStream alloc]init];</div><div class="line"> <span class="comment">// 此处代理相当于socket的代理</span></div><div class="line"> [_xmppStream addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
+<p>(1)实例化1</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 实例化</span></div><div class="line"> _xmppStream = [[XMPPStream alloc]init];</div><div class="line"> <span class="comment">// 此处代理相当于socket的代理</span></div><div class="line"> [_xmppStream addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
 <p>(2)将流和服务器连接(流要指定JID)</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 连接服务器 JID格式：用户名@服务器域名</span></div><div class="line"><span class="built_in">NSString</span> *jidString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%@"</span>,<span class="string">@"anonymous"</span>,YSX_XMPP_Domian];</div><div class="line"><span class="comment">// 此处jid设置了一个随意值 但是不能为空</span></div><div class="line">[_xmppStream setMyJID:[XMPPJID jidWithString:jidString]];</div><div class="line"><span class="comment">// 设置连接的服务器,注意现在主机不能使用ip,否则不满足ipv6的需求,会被拒</span></div><div class="line">[_xmppStream setHostName:host];</div><div class="line"><span class="comment">// 设置端口</span></div><div class="line">[_xmppStream setHostPort:YSX_Host_Port];</div><div class="line"><span class="comment">// 连接服务器</span></div><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line">[_xmppStream connectWithTimeout:<span class="number">10</span> error:&amp;error];</div></pre></td></tr></table></figure>
 <p>(3) 连接</p>
@@ -315,11 +315,9 @@
 <section class="read-more">
            
     
-        
-        
                
             <div class="read-more-item">
-                <span class="read-more-item-dim">更早的文章</span>
+                <span class="read-more-item-dim">最近的文章</span>
                 <h2 class="post-list__post-title post-title"><a href="/2016/06/29/iOS IM开发一XMPP基础知识(3)/" title="iOS IM开发&lt;一&gt;-XMPP基础知识（3）">iOS IM开发&lt;一&gt;-XMPP基础知识（3）</a></h2>
                 <p class="excerpt">
                 
@@ -339,6 +337,27 @@
                 <div class="post-list__meta"><time datetime="2016-06-29T09:44:25.000Z" class="post-list__meta--date date">2016-06-29</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
   <a class="tag-link" href="/tags/iOS/">iOS</a>
 </span><a class="btn-border-small" href="/2016/06/29/iOS IM开发一XMPP基础知识(3)/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2016/06/29/iOS IM开发一XMPP基础知识(1)/" title="iOS IM开发&lt;一&gt;-XMPP基础知识（1）">iOS IM开发&lt;一&gt;-XMPP基础知识（1）</a></h2>
+                <p class="excerpt">
+                
+                XMPP是什么? 有什么用?
+
+ XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 
+
+
+ XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2016-06-29T06:21:37.000Z" class="post-list__meta--date date">2016-06-29</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS/">iOS</a>
+</span><a class="btn-border-small" href="/2016/06/29/iOS IM开发一XMPP基础知识(1)/">继续阅读</a></div>
                        
             </div>
         
