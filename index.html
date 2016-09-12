@@ -303,18 +303,24 @@
       
         
           
-            <pre><code class="objc"><span class="comment">//  //  * XMPPRoom（聊天室）1</span>
-<span class="comment">//(2) 实例化心跳模块，配置，激活</span>
+          //  //  * XMPPRoom（聊天室）1
+//(2) 实例化心跳模块，配置，激活
 
-    <span class="comment">// 2. 代理</span>
+    // 2. 代理
 
- <span class="comment">//  * XMPPPubSub（公共订阅）</span>
-<span class="comment">//     1. 实例化心跳模块，配置，激活</span>
+ //  * XMPPPubSub（公共订阅）
+//     1. 实例化心跳模块，配置，激活
 
-   <span class="comment">//  2. 代理</span>
-</code></pre>
+   //  2. 代理
+
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/29/iOS IM开发一XMPP基础知识(3)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -425,159 +431,31 @@
       
         
           
-            <h2> 框架介绍</h2>
+           框架介绍
 
-<h3> XMPPJID</h3>
-
-<ul>
-<li><h3> XMPP中一个用户的账户ID就是一个JID。</h3>
-</li>
-<li><p></p><h3> 组成部分</h3><p></p>
-<ul>
-<li><p></p><h4> 全称(full): 用户名@域/资源 </h4><p></p>
-<pre><code>userName@domain/resource
-</code></pre></li>
-<li><p></p><h4> 非全称: 用户名@域</h4><p></p>
-<pre><code>userName@domain
-</code></pre></li>
-</ul>
-</li>
-<li><h3>资源(resource):用户账号的资源通常用来指设备,因为用户一个账号可能在多个设备上登录,通过resource来区别登录的设备，比如qq是可以在不同设备上同时登陆，但是同一终端是不可以的，比如手机1登陆，在手机2登陆，那么手机1就会被顶下线，就是通过区分resource来识别是否同一终端</h3>
+ XMPPJID
 
 
-</li>
-</ul>
-<h3> XMPPStream（流）</h3>
+ XMPP中一个用户的账户ID就是一个JID。
 
-<ul>
-<li><h3>XML流，里面的方法和协议都非常重要，包括连接XMPP服务器，登陆，注销，设置端口，消息的发送和接收，出席状态的改变，激活模块（比如心跳模块，花名册模块）都是要依靠这个XMPPStream才能实现</h3>
+ 组成部分
 
-</li>
-</ul>
-<h3> XMPPIQ（节点）</h3>
+ 全称(full): 用户名@域/资源 
+userName@domain/resource
 
-<ul>
-<li><h3>查询节点 Info/Query的缩写 类似于HTTP请求</h3>
-</li>
-<li><p></p><h3>type属性值：</h3><p></p>
-<ol>
-<li>get</li>
-<li>set</li>
-<li>result服务器的响应</li>
-<li>error必定包含<error>子节点 描述问题类型</error></li>
-</ol>
-</li>
-</ul>
-<h3> XMPPMessage（消息）</h3>
+ 非全称: 用户名@域
+userName@domain
 
-<ol>
-<li><h3>id（可选标识符）</h3>
-</li>
-<li><h3>from（发送者）</h3>
-</li>
-<li><h3>to（接收者）</h3>
-</li>
-<li><h3>subject（主题）</h3>
-</li>
-<li><h3>thread（标识特定会话）</h3>
-</li>
-<li><p></p><h3>type（类型）</h3><p></p>
-<ul>
-<li>chat -&gt; 单聊</li>
-<li>groupchat -&gt; 群聊</li>
-<li>normal -&gt; 默认</li>
-<li>error -&gt; 错误</li>
-<li>headline -&gt; 大标题</li>
-</ul>
-</li>
-<li><h3>nickName（用户昵称）</h3>
-</li>
-<li><h3>body（正文）</h3>
 
-</li>
-</ol>
-<h3>XMPPPresence(出席)</h3>
 
-<ol>
-<li><p></p><h3>type（类型）</h3><p></p>
-<ul>
-<li>error -&gt; 错误，发生在处理之前发送的出席信息节的时候; 如果出席信息节的类型为”error”, 它必须包含一个<error>子元素</error></li>
-<li>probe -&gt; 请求一个实体当前的出席信息， 应该只由一个服务器代表一个用户生成.</li>
-<li>available -&gt; 发送者可通讯(上线)</li>
-<li>unavailable -&gt; 发送者不再可通讯(下线)</li>
-<li>subscribe -&gt; 发送者希望订阅接收者的出席信息</li>
-<li>unsubscribe -&gt; 发送者取消订阅接收者的出席信息</li>
-<li>subscribed -&gt; 发送者已经允许接收者接收他们的出席信息</li>
-<li>unsubscribed -&gt; 订阅请求已经被拒绝或撤销之前准许的被对方订阅</li>
-</ul>
-</li>
-<li><p></p><h3>show（显示状态）可选的<show>元素. <show>元素没有定义属性.该XML字符数据必须是以下之一(更多的可用性状态可以通过扩展内容元素来定义):</show></show></h3><p></p>
-<ul>
-<li>away -&gt; 该用户临时离开</li>
-<li>chat -&gt; 该用户活跃并想聊天.(来找我呀)</li>
-<li>dnd -&gt; 该用户忙(dnd = “Do Not Disturb”，免打扰).(不要烦我)</li>
-<li>xa -&gt;  该用户要离开相当长时间(xa = “extended Away”，长时间离开).(离开了很久)</li>
-</ul>
-</li>
-<li><p></p><h3>status（自定义文字状态）</h3><p></p>
-<ul>
-<li>可选的<status>元素包含了自然人可读的定义实体可用性的自然语言描述的XML字符数据. 通常在出席信息节不包含’type’属性的时候被用于和show元素结合一起提供某个可用性状态的细节(例如, “In a meeting”，”开会中”). </status></li>
-</ul>
-</li>
-</ol>
-<h3>XMPPModule(模块)</h3><br>   <em> 各种功能模块的基类，继承它的模块均需在xmppStream中激活，可添加多个委托实例<br><br><h3>XMPPElement(元素)</h3>
-   </em> XML基本元素/stanza<br><br><h3>XMPPParser(解析器)</h3><br>   <em> XML解析<br><br><h3>XMPPLogging(日志)</h3>
-   </em> XMPP的日志框架<br><br><h3>XMPPInternal(核心)</h3><br>   * 整个XMPP框架内部使用的核心和高级底层内容<br><br>—————————————————————————————————————————————————————————————-<br><br><h2>通信过程</h2><br>   1. 服务器绑定/监听端口(一般是5222)<br>   2. 客户端连接到该socket地址<br>   3. 客户端发送初始XML<br>   4. 服务器返回初始XML<br>   5. 服务器回应支持的特性(features) 加密算法类型(可能还有注册\压缩方法\登陆验证)<br>   6. 如果客户端长时间不回应，发送ping节点询问客户端是否安好，若客户端也不回应，强制断开socket连接(闲置断开时间可在服务器管理后台配置)<br>   7. 客户端从上述加密算法类型中选择一种方式进行用户认证(XMPP握手)，如果是登陆，则文本内容需加上用户名密码拼接成的加密内容<br>   8. 若客户端选择的加密方式不是PLAIN,服务器会发送一段加密挑战(challenge),客户端成功完成挑战才能进行登陆<br>   9. 服务器返回认证结果<br>   10. 客户端再次发送初始化XML<br>   11. 再次返回特性，不再包括加密类型列表，多出了资源绑定(bind)节点/session(会话)节点<br>   12. 客户端发送set-IQ流进行资源绑定<br>   13. 服务器将前面中的id属性与客户端发送的资源名做绑定,并返回一个result-IQ流<br>   14. 客户端发送set-IQ流进行会话绑定<br>   15. 服务器进行session绑定,并返回result-IQ流<br>   16. 客户端发送出席节点、请求roster信息等<br>   17. 服务器返回该客户端的出席信息与自己好友的出席信息<br><br>—————————————————————————————————————————————————————————————-<br><br><h2>基本使用</h2><br><br><h3>连接</h3>
+资源(resource):用户账号的资源通常
+          ...
 
-<ul>
-<li>一切的通信都基于XML流, 必须先建立起XMPPStream，需要指定要连接到的服务器主机地址以及对于的端口</li>
-</ul>
-<p>(1)实例化</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 实例化</span></div><div class="line">_xmppStream = [[XMPPStream alloc]init];</div><div class="line"><span class="comment">// 此处代理相当于socket的代理</span></div><div class="line">[_xmppStream addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
-<p>(2)将流和服务器连接(流要指定JID)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 连接服务器 JID格式：用户名@服务器域名</span></div><div class="line"><span class="built_in">NSString</span> *jidString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%@"</span>,<span class="string">@"anonymous"</span>,YSX_XMPP_Domian];</div><div class="line"><span class="comment">// 此处jid设置了一个随意值 但是不能为空</span></div><div class="line">[_xmppStream setMyJID:[XMPPJID jidWithString:jidString]];</div><div class="line"><span class="comment">// 设置连接的服务器,注意现在主机不能使用ip,否则不满足ipv6的需求,会被拒</span></div><div class="line">[_xmppStream setHostName:host];</div><div class="line"><span class="comment">// 设置端口</span></div><div class="line">[_xmppStream setHostPort:YSX_Host_Port];</div><div class="line"><span class="comment">// 连接服务器</span></div><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line">[_xmppStream connectWithTimeout:<span class="number">10</span> error:&amp;error];</div></pre></td></tr></table></figure>
-<p>(3) 连接</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 连接服务器</span></div><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line">[_xmppStream connectWithTimeout:<span class="number">10</span> error:&amp;error];</div></pre></td></tr></table></figure>
-<p>(4) 连接服务器认证</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="meta">#pragma mark - <span class="meta-string">&lt;XMPPStreamDelegate&gt;</span></span></div><div class="line"><span class="comment">//  连接上socket,经历三次握手</span></div><div class="line">- (<span class="keyword">void</span>)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket ;</div><div class="line"><span class="comment">//  连接服务器成功</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamDidConnect:(XMPPStream *)sender ;</div><div class="line"><span class="comment">//  连接服务器失败</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(<span class="built_in">NSError</span> *)error ;</div><div class="line"><span class="comment">//  连接服务器超时</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamConnectDidTimeout:(XMPPStream *)sender ;</div><div class="line"><span class="comment">//  将要连接服务器</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamWillConnect:(XMPPStream *)sender ;</div><div class="line"><span class="comment">//  被用于鉴定断开服务器连接是否有效还是产生了错误导致断开,当断开服务器时调用</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamWasToldToDisconnect:(XMPPStream *)sender;</div></pre></td></tr></table></figure>
-<h3>注册/登录</h3>
-
-<p>(1) 注册<br><figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 在服务器上使用用户名和密码注册一个新用户,会返回是否注册成功,在内部实现是注册一个元素节点,</span></div><div class="line"><span class="comment">// 当流没有连接,或者注册服务不可用时,这个方法不做任何事</span></div><div class="line">[_xmppStream setMyJID:[XMPPJID jidWithString:account]];</div><div class="line">[_xmppStream registerWithPassword:password error:&amp;error];</div></pre></td></tr></table></figure></p>
-<p>(2) 注册回调(代理)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 这个方法会在注册成功时调用</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamDidRegister:(XMPPStream *)sender;</div><div class="line"><span class="comment">// 这个方法会在注册失败时调用, 如果错误码是 409, 说明这个用户已经注册</span></div><div class="line">- (<span class="keyword">void</span>)xmppStream:(XMPPStream *)sender didNotRegister:(<span class="built_in">NSXMLElement</span> *)error;</div><div class="line"><span class="comment">// 错误码可以这样去获取</span></div><div class="line"><span class="built_in">NSString</span> *errorCode = [[[error elementForName:<span class="string">@"error"</span>] attributeForName:<span class="string">@"code"</span>] stringValue];</div></pre></td></tr></table></figure>
-<p>(3) 登录</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 判断是否已经验证</span></div><div class="line"><span class="keyword">self</span>.xmppStream.isAuthenticated;</div><div class="line"><span class="comment">// 判断是正在验证</span></div><div class="line"><span class="keyword">self</span>.xmppStream.isAuthenticating;</div><div class="line">_xmppStream.myJID = [XMPPJID jidWithString:jidString];</div><div class="line"><span class="comment">// 验证密码, 此方法仅适用于标准的密码验证方案, 这不是主要的身份验证方法, 这种方法存在向后兼容性, 并可能在未来版本中消失。</span></div><div class="line"><span class="comment">// 实际上调用了authenticate:error:这个方法</span></div><div class="line"><span class="built_in">BOOL</span> authenticateResult =  [_xmppStream authenticateWithPassword:_password error:&amp;error];</div><div class="line"><span class="comment">// 这个是最根本的验证方法, 所有其他的身份验证方法都需要通过这个, 如果返回YES, 那么流会进入认证模式, 在认证时会不断调用</span></div><div class="line"><span class="comment">// handleAuth:方法, 直到认证被完成, 这个方法是异步的, 如果马上报了错误, 比如流没连接, 这个方法会返回NO, 并且返回错误, </span></div><div class="line"><span class="comment">// 否则会调用代理方法xmppStreamDidAuthenticate:和xmppStream:didNotAuthenticate:来传达认证成功还是失败, 这个方法是</span></div><div class="line"><span class="comment">// 抽象而且灵活的, 允许开发者去实现他们自定义的安全协议, 这个认证类为XMPPStream提供了一个分类,增加了一个实用的方法</span></div><div class="line">__block <span class="built_in">BOOL</span> result = <span class="literal">YES</span>;</div><div class="line">__block <span class="built_in">NSError</span> *err = <span class="literal">nil</span>;</div><div class="line"><span class="keyword">id</span> &lt;XMPPSASLAuthentication&gt; someAuth = <span class="literal">nil</span>;</div><div class="line">someAuth = [[XMPPPlainAuthentication alloc] initWithStream:_xmppStream password:password];</div><div class="line"><span class="built_in">BOOL</span> authenticateResult =  [_xmppStream authenticate:someAuth error:&amp;err];</div></pre></td></tr></table></figure>
-<p>(4)登录验证回调(代理)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 登录验证成功的回调</span></div><div class="line">- (<span class="keyword">void</span>)xmppStreamDidAuthenticate:(XMPPStream *)sender;</div><div class="line"><span class="comment">// 验证失败的回调</span></div><div class="line">- (<span class="keyword">void</span>)xmppStream:(XMPPStream *)sender didNotAuthenticate:(<span class="built_in">NSXMLElement</span> *)error;</div></pre></td></tr></table></figure>
-<p></p><h3>模块</h3><p></p>
-<ul>
-<li>XMPPAutoPing（心跳模块）</li>
-</ul>
-<p>(1) 实例化心跳模块，配置，激活</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 1.创建</span></div><div class="line"><span class="keyword">self</span>.xmppAutoPing = [[XMPPAutoPing alloc] initWithDispatchQueue:dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>)];</div><div class="line"><span class="comment">// 添加代理</span></div><div class="line">[<span class="keyword">self</span>.xmppAutoPing addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_global_queue(<span class="number">0</span> ,<span class="number">0</span>)];</div><div class="line"><span class="comment">// 2.配置</span></div><div class="line"><span class="comment">// ping的频率(默认是60s)</span></div><div class="line"><span class="keyword">self</span>.xmppAutoPing.pingInterval = <span class="number">300</span>;</div><div class="line"><span class="comment">// 超时时间 如果服务器在规定的时间里没有给我响应,就超时(默认是10s)</span></div><div class="line"><span class="keyword">self</span>.xmppAutoPing.pingTimeout = <span class="number">320</span>;</div><div class="line"><span class="comment">// 向谁发送心跳包,如果targetJID为空,那么默认为向服务器发送心跳包,在这种情况下，接收任何数据意味着我们已经收到了来自目标的数</span></div><div class="line"><span class="comment">// 据.如果targetJID不为空,那么它必须是一个完整的JID(user@domain.tld/rsrc),在这种情况,会监控JID的流数据.targetJID默认为空</span></div><div class="line"><span class="built_in">NSString</span> *jidString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%@"</span>,<span class="string">@"anonymous"</span>,YSX_XMPP_Domian];</div><div class="line"><span class="keyword">self</span>.xmppAutoPing.targetJID = [XMPPJID jidWithString:jidString];</div><div class="line"><span class="comment">// 有时ping的对象也会向我们发送ping查询,如果是这样的话,那么我们可能需要回应这个查询,将respondsToQueries会响应target的</span></div><div class="line"><span class="comment">// ping,但是当XMPPAutoPing或者XMPPPing有多个实例时,只有一个会响应,默认respondsToQueries是NO.</span></div><div class="line"><span class="keyword">self</span>.xmppAutoPing.respondsToQueries = <span class="literal">YES</span>;</div><div class="line"><span class="comment">// 3.激活-在某个流上激活</span></div><div class="line">[<span class="keyword">self</span>.xmppAutoPing activate:_xmppStream];</div></pre></td></tr></table></figure>
-<p>(2) 代理</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="meta">#pragma mark - <span class="meta-string">&lt;XMPPAutoPingDelegate&gt;</span></span></div><div class="line"><span class="comment">//  ping发送成功</span></div><div class="line">- (<span class="keyword">void</span>)xmppAutoPingDidSendPing:(XMPPAutoPing *)sender;</div><div class="line"><span class="comment">//  接收到ping响应成功</span></div><div class="line">- (<span class="keyword">void</span>)xmppAutoPingDidReceivePong:(XMPPAutoPing *)sender;</div><div class="line"><span class="comment">//  ping超时</span></div><div class="line">- (<span class="keyword">void</span>)xmppAutoPingDidTimeout:(XMPPAutoPing *)sender;</div></pre></td></tr></table></figure>
-<ul>
-<li>XMPPReconnect（重连模块）</li>
-</ul>
-<p>(1)  实例化重连模块，配置，激活</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="keyword">self</span>.xmppReconnect = [[XMPPReconnect alloc] initWithDispatchQueue:dispatch_get_main_queue()];</div><div class="line"><span class="comment">// 添加代理</span></div><div class="line">[<span class="keyword">self</span>.xmppReconnect addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div><div class="line"><span class="comment">// 自动重连(默认是YES)</span></div><div class="line"><span class="keyword">self</span>.xmppReconnect.autoReconnect = <span class="literal">YES</span>;</div><div class="line"><span class="comment">// 连接延迟时间,当意外断开第一次发生时,在重连之前有一个延迟。默认值是DEFAULT_XMPP_RECONNECT_DELAY = 2.0s,要禁用此功能，</span></div><div class="line"><span class="comment">// 将值设置为零。</span></div><div class="line"><span class="keyword">self</span>.xmppReconnect.reconnectDelay = <span class="number">1</span>;</div><div class="line"><span class="comment">// 重连时间间隔, 一个重新连接的计时器可以选择性地用于尝试定期重新连接。定时器将在初始重新连接延迟后开始。默认值是</span></div><div class="line"><span class="comment">// DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL = 20s,要禁用此功能，将值设置为零。</span></div><div class="line"><span class="keyword">self</span>.xmppReconnect.reconnectTimerInterval = <span class="number">1</span>;</div><div class="line"><span class="comment">// 使用以前连接的方法进行重连,默认是NO</span></div><div class="line"><span class="keyword">self</span>.xmppReconnect.usesOldSchoolSecureConnect = <span class="literal">YES</span>;</div><div class="line"><span class="comment">// 在xmppStream中激活重连模块</span></div><div class="line">[<span class="keyword">self</span>.xmppReconnect activate:_xmppStream];</div></pre></td></tr></table></figure>
-<p>(2)  其他方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 当不使用自动重连时,这个方法被用于手动开始重连进程,比如说使用网络监控去初始化XMPP连接,或者重连在非常有限的情况下，手动控制</span></div><div class="line"><span class="comment">// 更为适合。调用此方法后，可以让后面的断开连接后不再继续重连。这只适用于流已经开启的时候,再开启手动重连,那么如果先开启手动重连,</span></div><div class="line"><span class="comment">// 再去开启流,是不会影响连接的自动重连.这个方法在流断开时并不会做任何事。</span></div><div class="line">[<span class="keyword">self</span>.xmppReconnect manualStart];</div><div class="line"><span class="comment">// 停止当前的重新连接过程,这个方法将停止当前的重新连接过程,不论是自动重连还是手动重连,停止重新连接过程不会阻止以后的自动重新连接</span></div><div class="line"><span class="comment">// 或者以后的手动重连,它只停止当前的重新连接过程,如果属性启用,autoreconnect属性仍然启用，认证或者意外断开连接，此类将仍然尝</span></div><div class="line"><span class="comment">// 试一个自动重新连接。</span></div><div class="line">[<span class="keyword">self</span>.xmppReconnect stop];</div></pre></td></tr></table></figure>
-<p>(3)  代理</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="meta">#pragma mark - <span class="meta-string">&lt;XMPPReconnectDelegate&gt;</span></span></div><div class="line"><span class="comment">//  检测到意外的断开连接</span></div><div class="line">- (<span class="keyword">void</span>)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(<span class="built_in">SCNetworkReachabilityFlags</span>)connectionFlags;</div><div class="line"><span class="comment">//  是否阻止自动重连</span></div><div class="line">- (<span class="built_in">BOOL</span>)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(<span class="built_in">SCNetworkReachabilityFlags</span>)reachabilityFlags;</div></pre></td></tr></table></figure>
-<ul>
-<li>XMPPRoster（花名册模块，也就是好友列表）<br>(1)  实例化重连模块，配置，激活</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">    <span class="comment">// 存储器: 在XMPP里只要是存储器,都是一个单例</span></div><div class="line">    XMPPRosterCoreDataStorage *rosterStorage = [XMPPRosterCoreDataStorage sharedInstance];</div><div class="line">    <span class="keyword">self</span>.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:rosterStorage dispatchQueue:dispatch_get_main_queue()];</div><div class="line">    <span class="comment">// 添加代理</span></div><div class="line">    [<span class="keyword">self</span>.xmppRoster addDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div><div class="line">    <span class="comment">// 配置</span></div><div class="line">    <span class="comment">// 一连接流是否自动获取花名册(联系人列表),如果为NO,则需要手动获取(默认是YES)</span></div><div class="line">    <span class="keyword">self</span>.xmppRoster.autoFetchRoster = <span class="literal">YES</span>;</div><div class="line">    <span class="comment">// 在XMPP流断开连接的时候,是否清除本地存储的用户和资源(默认是YES)</span></div><div class="line">    <span class="keyword">self</span>.xmppRoster.autoClearAllUsersAndResources = <span class="literal">NO</span>;</div><div class="line">    <span class="comment">// 是否自动接受别人对我的订阅(是否自动接受别人添加我为好友),如果为NO,则需要手动接受(默认是YES),订阅后会出现在双方的花名册中</span></div><div class="line">    <span class="keyword">self</span>.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = <span class="literal">YES</span>;</div><div class="line">    <span class="comment">// 激活</span></div><div class="line">    <span class="comment">//在xmppStream中激活好友管理模块</span></div><div class="line">    [<span class="keyword">self</span>.xmppRoster activate:_xmppStream];</div><div class="line">`</div></pre></td></tr></table></figure>
-<p>(2)   其他属性</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 是否在请求花名册</span></div><div class="line"><span class="keyword">self</span>.xmppRoster.requestedRoster;</div><div class="line"><span class="comment">// 是否已经从服务器中接收到花名册,正在填充花名册</span></div><div class="line"><span class="keyword">self</span>.xmppRoster.populating;</div><div class="line"><span class="comment">// 是否接收到花名册并且填充花名册完毕</span></div><div class="line"><span class="keyword">self</span>.xmppRoster.hasRoster;</div></pre></td></tr></table></figure>
-<p>(3) 其他方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 从服务器中手动匹配花名册</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster fetchRoster];</div><div class="line"><span class="built_in">NSString</span> *jidString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@@%@"</span>,<span class="string">@"anonymous"</span>,YSX_XMPP_Domian];</div><div class="line">XMPPJID *user = [XMPPJID jidWithString:jidString];</div><div class="line"><span class="comment">// 添加好友到花名册</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster addUser:user withNickname:<span class="literal">nil</span>];</div><div class="line"><span class="comment">// 添加好友到花名册和组</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster addUser:user withNickname:<span class="literal">nil</span> groups:@[]];</div><div class="line"><span class="comment">// 添加好友到花名册和组并且订阅他们的出席状态</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster addUser:user withNickname:<span class="literal">nil</span> groups:@[] subscribeToPresence:<span class="literal">YES</span>];</div><div class="line"><span class="comment">// 给jid设置一个昵称</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster setNickname:<span class="string">@"anonymous"</span> forUser:user];</div><div class="line"><span class="comment">// 从花名册移除好友,并且才取消订阅出席状态,移除对方接收我们出席状态的权限</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster removeUser:user];</div><div class="line"><span class="comment">// 订阅用户出席状态</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster subscribePresenceToUser:user];</div><div class="line"><span class="comment">// 取消订阅用户出席状态</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster unsubscribePresenceFromUser:user];</div><div class="line"><span class="comment">// 移除对方接收我们出席状态的权限</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster revokePresencePermissionFromUser:user];</div><div class="line"><span class="comment">// 允许对方接收我们出席状态的权限而且是否添加要花名册</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster acceptPresenceSubscriptionRequestFrom:user andAddToRoster:<span class="literal">YES</span>];</div><div class="line"><span class="comment">// 拒绝对方订阅我们出席状态的权限</span></div><div class="line">[<span class="keyword">self</span>.xmppRoster rejectPresenceSubscriptionRequestFrom:user];</div></pre></td></tr></table></figure>
-<p>(4) 代理</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 接收到好友订阅请求,在这个代理方法里可以调用acceptPresenceSubscriptionRequestFrom: </span></div><div class="line"><span class="comment">// rejectPresenceSubscriptionRequestFrom: 来接收或者拒绝订阅好友请求</span></div><div class="line">- (<span class="keyword">void</span>)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence &#123;</div><div class="line"><span class="comment">// 手动接受,From:要接受谁的订阅请求 AddToRoster:是否添加到花名册</span></div><div class="line">    [sender acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:<span class="literal">YES</span>];</div><div class="line">&#125;</div><div class="line"><span class="comment">//  好友关系发生改变,订阅情况发生改变</span></div><div class="line">- (<span class="keyword">void</span>)xmppRoster:(XMPPRoster *)sender didReceiveRosterPush:(XMPPIQ *)iq;</div><div class="line"><span class="comment">//  开始填充花名册</span></div><div class="line">- (<span class="keyword">void</span>)xmppRosterDidBeginPopulating:(XMPPRoster *)sender;</div><div class="line"><span class="comment">//  结束填充花名册</span></div><div class="line">- (<span class="keyword">void</span>)xmppRosterDidEndPopulating:(XMPPRoster *)sender;</div><div class="line"><span class="comment">//  接收到了item实例</span></div><div class="line">- (<span class="keyword">void</span>)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(<span class="built_in">NSXMLElement</span> *)item;</div></pre></td></tr></table></figure>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/29/iOS IM开发一XMPP基础知识(2)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -688,140 +566,19 @@
       
         
           
-            <h2>XMPP是什么? 有什么用?</h2>
+          XMPP是什么? 有什么用?
 
-<h3> XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 </h3>
-
-<ul>
-<li><h3> XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天协议。</h3> 
-</li>
-<li><p></p><h3>  XMPP的前身是Jabber，一个开源形式组织产生的网络即时通信协议。XMPP目前被IETF国际标准组织完成了标准化工作。标准化的核心结果分为两部分: </h3> <p></p>
-<ul>
-<li><h4> 核心的XML流传输协议，可用于服务类实时通讯、表示和需求响应服务中的XML数据元流式传输</h4> 
-</li>
-<li><h4>基于XML流传输的即时通讯扩展应用，用于即时消息（IM）以及在线现场探测</h4>
-</li>
-</ul>
-</li>
-<li><h3>我们学习XMPP的可以去 <a href="http://wiki.jabbercn.org/" target="_blank" rel="external">XMPP中文翻译计划</a>或者<a href="http://xmpp.org/" target="_blank" rel="external">XMPP官方网站</a></h3>
-</li>
-</ul>
-<hr>
-<h3> socket基础知识</h3>
-
-<ul>
-<li><h3> XMPP主要是使用socket，那socket我们通常又称为套接字，网络上的两个程序通过一个双向的通信连接接口来实现数据的交换，那么两端分别各有一个socket，是绑定端口的，便于识别应用程序。使用socket，可以只传送数据本身而不用进行XML封装，大大降低数据传输的开销(JSON)，而且允许应用程序运行在异步模式（提高效率），只有在需要的时候才接收数据</h3> 
+ XMPP - Extensible Messaging and Presence Protocol 可扩展通讯和表示协议 
 
 
-</li>
-</ul>
-<ul>
-<li><p></p><h3> 相信我们大学也学过网络的OSI参考模型，分为七层，那我们移动端主要有五层</h3> <p></p>
-<ul>
-<li><h4> 应用层： 终端应用，在手机上就是我们的APP</h4>
-</li>
-<li><h4>传输层：传输数据协议与端口，TCP传输控制协议和UDP数据报文协议为主，通过端口号可以找到相应APP，有效端口为0~65535，但是系统使用或者保留端口为1~1024，所以我们尽量不会去使用它</h4>
+ XMPP是一种基于标准通用标记语言的子集XML的协议，通过Socket长连接、以XML格式进行基本信息交换、C/S，S/S多种架构的聊天
+          ...
 
-<ul>
-<li><p>TCP（传输控制协议） 所有需要完整数据</p>
-<ul>
-<li><p>聊天  下载  请求数据等等</p>
-</li>
-<li><p>建立连接，形成传输数据的通道</p>
-</li>
-<li><p>在连接中进行大数据传输（数据大小不收限制）</p>
-</li>
-<li><p>通过三次握手完成连接，是可靠协议，安全送达</p>
-</li>
-<li><p>必须建立连接，效率会稍低</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>UDP（用户数据报协议）公屏软件视频会议</p>
-<ul>
-<li><p>将数据及源和目的封装成数据包中，不需要建立连接</p>
-</li>
-<li><p>每个数据报的大小限制在64K之内</p>
-</li>
-<li><p>因为无需连接，因此是不可靠协议</p>
-</li>
-<li><p>不需要建立连接，速度快</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4>网络层：路由与节点，确保数据传输，也就是IP地址，每一台主机都有IP</h4>
-</li>
-<li><h4>数据链路层：从物理层接受的数据进行MAC地址封装与解封，主要是由网卡和交换机构成</h4>
-</li>
-<li><h4>物理层：利用物理传输介质为数据链路层提供物理连接，以便透明的传送比特流。常用设备有集线器、中继器、调制解调器、网线。</h4>
-</li>
-</ul>
-</li>
-<li><p></p><h3>从图中可以看出socket主要是在应用层跟传输层之间</h3><img src="http://o7gqkucyn.bkt.clouddn.com/d000baa1cd11728b45647b06cafcc3cec3fd2c4c%20%281%29.jpg" alt=""><p></p>
-</li>
-</ul>
-<h3> socket长、短连接&amp;心跳包</h3><br><em> <h3>短连接</h3><br>     1. 数据请求结束之后，马上断开连接<br>     2. 能够及时释放服务器资源<br>     3. 让服务器能够为更多的用户提供服务
-</em> <h3>长连接</h3><br>     1. 一旦建立连接后，始终保持连接状态<br>     2. 后续只需要发送和接收数据，数据响应及时<br>     3. 长连接对服务器资源占用较大<br>     4. 对交互响应要求快的应用，例如即时通讯，需要使用长连接<br><em> <h3>心跳包</h3><br>     1. 检测长连接的重要技术手段<br>     2. 可以由服务器发送，定时给客户端发送小数据，根据回执判断客户端是否在线<br>     3. 可以由客户端发送，定时向客户端发送小数据，报告客户端当前在线<br>     4. 最终目的是节省服务器资源<br><br><h3> socket类型</h3>
-</em> <h3>SOCK_STREAM（流式socket）：面向连接，使用TCP协议，使用NSStream收发数据<br>     开发步骤：</h3><br>     1. 网络连接设置<br>     2. 设置网络连接，绑定到主机IP和端口<br>     3. 设置输入流和输出流的代理，监听数据流的状态<br>     4. 将输入输出流添加至运行循环<br>     5. 打开输入流NSInputStream和输出流NSOutputStream<br>     6. 发送消息给服务器<br>     7. 有可读取字节时，读取服务器返回的内容<br>     8. 到达流末尾时，关闭流，同时并从主运行循环中删除<br><br>* <h3> SOCK_DGRAM（数据报式socket）：无连接，使用UPD协议</h3>
-
-<hr>
-<p></p><h3> XMPP主要基础知识</h3><p></p>
-<ul>
-<li><p></p><h3>XXMPP基本结构</h3><p></p>
-<ol>
-<li>XMPP是一个典型的C/S架构，而不是像大多数即时通讯软件一样，使用P2P客户端到客户端的架构，也就是说在大多数情况下，当两个客户端进行通讯时， 他们的消息都是通过服务器传递的。采用这种架构，主要是为了简化客户端，将大多数工作放在服务器端进行</li>
-<li>XMPP中定义了三个角色，客户端，服务器，网关。通信能够在这三者的任意两个之间双向发生</li>
-<li>网关承担着与异构即时通信系统的互联互通，异构系统可以包括SMS（短信），MSN，ICQ等</li>
-<li>基本的网络形式是单客户端通过TCP/IP连接到单服务器，然后在之上传输XML流</li>
-</ol>
-</li>
-<li><p></p><h3>XXMPP工作原理</h3><p></p>
-<ol>
-<li>节点连接到服务器</li>
-<li>服务器利用本地目录系统中的证书对其认证</li>
-<li>节点指定目标地址，让服务器告知目标状态</li>
-<li>服务器查找、连接并进行相互认证</li>
-<li>节点之间进行交互</li>
-</ol>
-</li>
-<li><p></p><h3>XXMPP传输内容</h3><p></p>
-<ul>
-<li><h4>XMPP是一种类似于HTTP协议的一种数据传输协议，其过程就如同“解包装–〉包装”的过程。只需要理解其接收的类型及返回的类型，便可以很好的利用XMPP来进行数据通讯</h4><ol>
-<li>XMPP应用传输的是与即时通讯相关的指令(特殊含义的XML元素和属性等等)。在以前这些命令要么用二进制的形式发送（比如QQ），要么用纯文本指令加空格加参数加换行符的方式发送（比如MSN）</li>
-<li>而XMPP传输的即时通讯指令的逻辑与以往相仿，只是协议的形式变成了XML格式的纯文本。这不但使得解析容易了，人也容易阅读了，方便了开发和查错</li>
-<li>而XMPP的核心部分就是一个在网络上分片段发送XML的流协议。这个流协议是XMPP的即时通讯指令的传递基础，也是一个非常重要的可以被进一步利用的网络基础协议，可以说XMPP用TCP传的是XML流</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p></p><h3>XXMPP三大节点 </h3><p></p>
-  <figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">XMPPPresence:</span>出席 <span class="params">&lt;presence/&gt;</span></div><div class="line"><span class="symbol">XMPPMessage:</span>消息<span class="params">&lt;message/&gt;</span></div><div class="line"><span class="symbol">XMPPIQ:</span>信息请求（info query)<span class="params">&lt;iq/&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p></p><h3> XMPP集成</h3><p></p>
-<p></p><h4>一般都会使用Openfire搭建服务器，使用Spark来调试XMPP，这方面不多说，这里主要说iOS集成。</h4><p></p>
-<ul>
-<li><h3>使用cocoapods集成 pod ‘XMPPFramework’，注意pod的XMPP是不包含XEP-XXXX扩展框架，需要自行另外导入pod ‘XMPPFramework/XEP-0045’,但是好处是导入后可以直接使用</h3></li>
-<li><h3>直接导入框架，编译报错，解决：</h3><ol>
-<li><img src="http://o7gqkucyn.bkt.clouddn.com/D039B2B7-B068-4790-A6E9-8622145E2301.png" alt=""><br>  需要在Build Settings中设置Header Search Paths 为$(SDKROOT)/usr/include/libxml2</li>
-<li>缺少UIKit，可以选择配置pch解决（此处没有图）</li>
-<li><img src="http://o7gqkucyn.bkt.clouddn.com/9FE6DF2B-EE6D-465E-A921-0F8692784866.png" alt=""><br>  缺少动态库libxml2.tbd和libresolv.tbd</li>
-<li><img src="http://o7gqkucyn.bkt.clouddn.com/bitcode.png" alt=""><br>  在Build Settings中关闭Enable Bitcode</li>
-<li><img src="http://i.stack.imgur.com/uwKak.jpg" alt=""><ul>
-<li>header search paths add “$(SDKROOT)/usr/include/libxml2”</li>
-<li>Other Linker Flags add “-lxml2”</li>
-<li>Framework Search Path add “/usr/lib/libxml2.dylib”</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/29/iOS IM开发一XMPP基础知识(1)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
