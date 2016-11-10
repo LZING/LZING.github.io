@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-10T08:52:24.000Z</updated>
+  <updated>2016-11-10T09:49:17.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/07/20/iOS%20AVFoundation%E5%85%A5%E9%97%A8/"/>
     <id>http://yoursite.com/2016/07/20/iOS AVFoundation入门/</id>
     <published>2016-07-20T04:27:42.000Z</published>
-    <updated>2016-11-10T08:52:24.000Z</updated>
+    <updated>2016-11-10T09:49:17.000Z</updated>
     
     <content type="html"><![CDATA[<h2> AVFoundation的含义 </h2>
 
@@ -141,13 +141,50 @@
 </ul>
 <ol>
 <li><h4> H.264 </h4>  <ul>
-<li>123        </li>
+<li>规范是Motion Picture Experts Group（MPEG），通过以下两个维度缩小了视频文件的尺寸<pre><code>* 空间：压缩独立视频帧，被称为帧内压缩。
+* 时间：通过以组为单位的视频帧压缩冗余数据，称为帧间压缩      
+</code></pre></li>
+<li>帧内压缩通过消除包含在每个独立视频帧内的色彩及结构中的冗余信息来压缩，因此可在不降低图片质量的情况尽可能压缩尺寸。也可作为有损压缩算法，但通常用于对原始图片的一部分进行处理以生成高质量的照片，通过这一过程创建的帧称为I-frames。</li>
+<li>在帧内压缩中，很多帧被组合一起作为一组图片（GOP）中有三个不同类型的帧。<pre><code>* I-frames：（Intra-coded Picture）关键帧或者一些独立的帧，每个GOP都有一个I-frames，尺寸最大，解压最快
+* P-frames：（Predicted Picture）预测帧，基于I-frames或者P-frames的可预测图片进行编码得到
+* B-frames：（Bi-predictive Picture）双向帧，基于使用之前和之后的帧信息进行编码后得到的帧。几乎不需要存储空间，但需要依赖其他帧，所以解压时间长
+</code></pre></li>
+<li>H.264还支持编码视图，用于确定在整个编码过程中所用到的算法<pre><code>* Baseline：通常用于对移动设备的媒体内容进行处理，提供了最低效率的压缩，而且压缩后文件仍然较大
+* Main：这个标准的计算强度要比Baseline的高，使用算法多，可达到较高压缩率
+* High：高标准的方法会得到最高质量的压缩效果
+</code></pre></li>
 </ul>
 </li>
-<li><h4> H.264 </h4>  <ul>
-<li>123        </li>
+<li><h4> Apple ProRes </h4>  <ul>
+<li>Apple ProRes被认为是一个中间件或中间层编解码器，为专业编辑和生产工作流服务。是独立于帧的，只有I-frames可使用。还使用可变比特率编码的方式对复杂场景的每一帧进行编码。</li>
+<li>Apple ProRes只能用于OSX上，iOS上只能使用H.264</li>
 </ul>
 </li>
+</ol>
+</li>
+<li><p></p><h3> 音频编解码器 </h3><p></p>
+<ul>
+<li><h4> 只要是Core Audio支持的，AVFoundation都支持，然而在不使用线性PCM音频时，更多的只能使用AAC </h4></li>
+</ul>
+<ol>
+<li><h4> AAC（Advanced Audio Coding） </h4>  <ul>
+<li>高级音频编码是H.264标准相应的音频处理方式，目前为音频流和音频资源中最主流的编码方式。没有证书与许可方面限制</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2> 容器格式 </h2>
+
+<ul>
+<li><h3> 各种扩展名结尾文件，比如mov、m4v、.mpg、.m4a都认为是文件格式，但其正确定义应该是这些类型都是文件的容器格式。被认为是元文件格式。可将容器格式视为包含媒体类型的目录。 </h3><ul>
+<li><h4> AVFoundation中主要有两种容器格式 </h4></li>
+</ul>
+<ol>
+<li><h4> QuickTime </h4>  <pre><code>* 是苹果公司在QuickTime架构中定义的最常用的格式，具有非常高的可靠性并且是一种有着非常清晰定义的格式
+</code></pre></li>
+<li><h4> MPEG-4 </h4>  <pre><code>* MP4容器格式，从QuickTime规范中派生出的一种行业标准格式，所以两个规范在结构和功能方面非常类似
+</code></pre></li>
 </ol>
 </li>
 </ul>
