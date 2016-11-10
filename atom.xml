@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-30T06:44:08.000Z</updated>
+  <updated>2016-11-10T04:10:48.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,30 +16,98 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>iOS IM开发&lt;一&gt;-XMPP基础知识（3）</title>
-    <link href="http://yoursite.com/2016/06/29/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(3)/"/>
-    <id>http://yoursite.com/2016/06/29/iOS IM开发一XMPP基础知识(3)/</id>
-    <published>2016-06-29T09:44:25.000Z</published>
-    <updated>2016-08-30T06:44:08.000Z</updated>
+    <title>iOS AVFoundation入门</title>
+    <link href="http://yoursite.com/2016/07/20/iOS%20AVFoundation%E5%85%A5%E9%97%A8/"/>
+    <id>http://yoursite.com/2016/07/20/iOS AVFoundation入门/</id>
+    <published>2016-07-20T04:27:42.000Z</published>
+    <updated>2016-11-10T04:10:48.000Z</updated>
     
-    <content type="html"><![CDATA[<pre><code class="objc"><span class="comment">//  //  * XMPPRoom（聊天室）1</span>
-<span class="comment">//(2) 实例化心跳模块，配置，激活</span>
+    <content type="html"><![CDATA[<h2> AVFoundation的含义 </h2>
 
-    <span class="comment">// 2. 代理</span>
+<ul>
+<li><h3> AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程序能以最佳性能运行 </h3>
 
- <span class="comment">//  * XMPPPubSub（公共订阅）</span>
-<span class="comment">//     1. 实例化心跳模块，配置，激活</span>
+</li>
+</ul>
+<h2> AVFoundation适用范围 </h2>
 
-   <span class="comment">//  2. 代理</span>
-</code></pre>
+<h3> 在iOS中，提供了AVKit，用于简化目前流行的视频播放应用程序创建过程，虽然简单，但是不够灵活</h3>
+
+<ul>
+<li><p></p><h3> Core Audio </h3><p></p>
+<ul>
+<li><h4> iOS与OSX上处理音频事件的框架。是由多个框架整合在一起的总称，为音频和MIDI内容的录制、播放、处理提供接口。Core Audio也提供高级接口，比如通过Audio Queue Services框架，主要处理基本音频播放和录音相关功能。同时提供相对低层级的接口，尤其是Audio Units接口，它们提供了针对音频信号进行完全控制的功能，能让你构建一些复杂的音频处理模式 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> Core Video </h3><p></p>
+<ul>
+<li><h4> iOS与OSX上针对数字视频所提供的管道模式，相对Core Media提供图片缓存和缓存池支持，提供一个对数字视频逐帧访问的接口，通过像素格式间转换并管理视频同步事项使复杂工作变得简单 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> Core Media </h3><p></p>
+<ul>
+<li><h4> AVFoundation所用到低层级媒体管道一部分，提供针对音频样本和视频帧处理所需的低层级数据类型与接口 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> Core Animation </h3><p></p>
+<ul>
+<li><h4> OSX和iOS提供的合成及动画相关框架，封装了OpenGL和OpenGL ES功能基于Objective-C的类，能够在视频编辑和播放中添加动画与图片效果 </h4>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2> 解析AV Foundation </h2>
+
+<ul>
+<li><p></p><h3> 音频播放与记录 </h3><p></p>
+<ul>
+<li><h4> AVAudioPlayer和AVAudioRecorder提供简单的整合音频播放和记录的功能 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体文件检查 </h3><p></p>
+<ul>
+<li><h4> 提供检查正在使用的媒体文件功能，可以查看这些媒体资源来确定是否适合一些特定的任务，比如是否可以用于回收或者被编辑与导出。还可以获取该媒体资源相关技术参数，比如创建时间，内容持续时间或首选播放音量 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 视频播放 </h3><p></p>
+<ul>
+<li><h4> 提供视频播放功能，让你播放本地文件或者远程流中获取视频资源，并对视频播放和内容的展示进行控制。核心是AVPlayer和AVPlayerItem，这两个类让你对资源的播放进行控制 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体捕捉 </h3><p></p>
+<ul>
+<li><h4> 提供对iOS和MAC设备进行精密控制的功能。摄像头捕捉核心类是AVCaptureSession，他是接受摄像头设备由各路流发来的电影和图片的汇集点 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体编辑 </h3><p></p>
+<ul>
+<li><h4> 提供对媒体资源的整合和编辑的功能。允许修改和编辑独立的媒体片段、随时修改音频文件的参数以及添加动画标题和场景切换效果 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体处理 </h3><p></p>
+<ul>
+<li><h4> 提供直接访问视频帧和音频样本功能，当需要执行更高级的媒体处理任务时，可以使用AVAssetReader和AVAssetWriter来实现这些功能 </h4>  
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  //  * XMPPRoom（聊天室）1&lt;/span&gt;
-&lt;span class=&quot;comment&quot;&gt;//(2) 实例化心跳模块，配置，激活&lt;/span&gt;
+      &lt;h2&gt; AVFoundation的含义 &lt;/h2&gt;
 
-    &lt;span cl
+&lt;ul&gt;
+&lt;li&gt;&lt;h3&gt; AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程
     
     </summary>
     
@@ -237,7 +305,7 @@
     <link href="http://yoursite.com/2016/06/29/iOS%20IM%E5%BC%80%E5%8F%91%E4%B8%80XMPP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(1)/"/>
     <id>http://yoursite.com/2016/06/29/iOS IM开发一XMPP基础知识(1)/</id>
     <published>2016-06-29T06:21:37.000Z</published>
-    <updated>2016-08-22T10:53:35.000Z</updated>
+    <updated>2016-09-13T03:21:22.000Z</updated>
     
     <content type="html"><![CDATA[<h2>XMPP是什么? 有什么用?</h2>
 

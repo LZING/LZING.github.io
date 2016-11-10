@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="We are uniquecoder" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="AVFoundation的含义 
+
+
+ AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程序能以最佳性能运行 
+
+
+
+ AVFoundation适用范围 
+
+ 在iOS中，提供了AVKit，用于简化目前流行的视频播放应用程序创建过程，虽然简单，但是不够">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS AVFoundation入门">
+<meta property="og:url" content="http://yoursite.com/2016/07/20/iOS AVFoundation入门/index.html">
+<meta property="og:site_name" content="We are uniquecoder">
+<meta property="og:description" content="AVFoundation的含义 
+
+
+ AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程序能以最佳性能运行 
+
+
+
+ AVFoundation适用范围 
+
+ 在iOS中，提供了AVKit，用于简化目前流行的视频播放应用程序创建过程，虽然简单，但是不够">
+<meta property="og:updated_time" content="2016-11-10T04:10:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS AVFoundation入门">
+<meta name="twitter:description" content="AVFoundation的含义 
+
+
+ AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程序能以最佳性能运行 
+
+
+
+ AVFoundation适用范围 
+
+ 在iOS中，提供了AVKit，用于简化目前流行的视频播放应用程序创建过程，虽然简单，但是不够">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6666666,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/20/iOS AVFoundation入门/"/>
+
+  <title> iOS AVFoundation入门 | We are uniquecoder </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">We are uniquecoder</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Ken‘s blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS AVFoundation入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-20T12:27:42+08:00" content="2016-07-20">
+              2016-07-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2> AVFoundation的含义 </h2>
+
+<ul>
+<li><h3> AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程序能以最佳性能运行 </h3>
+
+</li>
+</ul>
+<h2> AVFoundation适用范围 </h2>
+
+<h3> 在iOS中，提供了AVKit，用于简化目前流行的视频播放应用程序创建过程，虽然简单，但是不够灵活</h3>
+
+<ul>
+<li><p></p><h3> Core Audio </h3><p></p>
+<ul>
+<li><h4> iOS与OSX上处理音频事件的框架。是由多个框架整合在一起的总称，为音频和MIDI内容的录制、播放、处理提供接口。Core Audio也提供高级接口，比如通过Audio Queue Services框架，主要处理基本音频播放和录音相关功能。同时提供相对低层级的接口，尤其是Audio Units接口，它们提供了针对音频信号进行完全控制的功能，能让你构建一些复杂的音频处理模式 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> Core Video </h3><p></p>
+<ul>
+<li><h4> iOS与OSX上针对数字视频所提供的管道模式，相对Core Media提供图片缓存和缓存池支持，提供一个对数字视频逐帧访问的接口，通过像素格式间转换并管理视频同步事项使复杂工作变得简单 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> Core Media </h3><p></p>
+<ul>
+<li><h4> AVFoundation所用到低层级媒体管道一部分，提供针对音频样本和视频帧处理所需的低层级数据类型与接口 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> Core Animation </h3><p></p>
+<ul>
+<li><h4> OSX和iOS提供的合成及动画相关框架，封装了OpenGL和OpenGL ES功能基于Objective-C的类，能够在视频编辑和播放中添加动画与图片效果 </h4>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2> 解析AV Foundation </h2>
+
+<ul>
+<li><p></p><h3> 音频播放与记录 </h3><p></p>
+<ul>
+<li><h4> AVAudioPlayer和AVAudioRecorder提供简单的整合音频播放和记录的功能 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体文件检查 </h3><p></p>
+<ul>
+<li><h4> 提供检查正在使用的媒体文件功能，可以查看这些媒体资源来确定是否适合一些特定的任务，比如是否可以用于回收或者被编辑与导出。还可以获取该媒体资源相关技术参数，比如创建时间，内容持续时间或首选播放音量 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 视频播放 </h3><p></p>
+<ul>
+<li><h4> 提供视频播放功能，让你播放本地文件或者远程流中获取视频资源，并对视频播放和内容的展示进行控制。核心是AVPlayer和AVPlayerItem，这两个类让你对资源的播放进行控制 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体捕捉 </h3><p></p>
+<ul>
+<li><h4> 提供对iOS和MAC设备进行精密控制的功能。摄像头捕捉核心类是AVCaptureSession，他是接受摄像头设备由各路流发来的电影和图片的汇集点 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体编辑 </h3><p></p>
+<ul>
+<li><h4> 提供对媒体资源的整合和编辑的功能。允许修改和编辑独立的媒体片段、随时修改音频文件的参数以及添加动画标题和场景切换效果 </h4>
+</li>
+</ul>
+</li>
+<li><p></p><h3> 媒体处理 </h3><p></p>
+<ul>
+<li><h4> 提供直接访问视频帧和音频样本功能，当需要执行更高级的媒体处理任务时，可以使用AVAssetReader和AVAssetWriter来实现这些功能 </h4>  
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/29/iOS IM开发一XMPP基础知识(2)/" rel="next" title="iOS IM开发<一>-XMPP基础知识（2）">
+                <i class="fa fa-chevron-left"></i> iOS IM开发<一>-XMPP基础知识（2）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="萌萌哒iOS工程师刘梓颖" />
+          <p class="site-author-name" itemprop="name">萌萌哒iOS工程师刘梓颖</p>
+          <p class="site-description motion-element" itemprop="description">学无止境,努力争当全栈,路还远一步一步走,第一步iOS已经走了过半,接下来是前端了,目前在做直播</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LZING" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2358535205/home?wvr=5&lf=reg" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text"> AVFoundation的含义 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text"> AVFoundation是iOS和OSX系统中用户处理基于时间的媒体数据框架，充分利用多核心硬件优势，并使用GCD多线程机制将复杂计算进程放在子线程处理，并且提供硬件加速，保证在大部分设备上应用程序能以最佳性能运行 </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text"> AVFoundation适用范围 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text"> 在iOS中，提供了AVKit，用于简化目前流行的视频播放应用程序创建过程，虽然简单，但是不够灵活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text"> Core Audio </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text"> iOS与OSX上处理音频事件的框架。是由多个框架整合在一起的总称，为音频和MIDI内容的录制、播放、处理提供接口。Core Audio也提供高级接口，比如通过Audio Queue Services框架，主要处理基本音频播放和录音相关功能。同时提供相对低层级的接口，尤其是Audio Units接口，它们提供了针对音频信号进行完全控制的功能，能让你构建一些复杂的音频处理模式 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text"> Core Video </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text"> iOS与OSX上针对数字视频所提供的管道模式，相对Core Media提供图片缓存和缓存池支持，提供一个对数字视频逐帧访问的接口，通过像素格式间转换并管理视频同步事项使复杂工作变得简单 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text"> Core Media </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.</span> <span class="nav-text"> AVFoundation所用到低层级媒体管道一部分，提供针对音频样本和视频帧处理所需的低层级数据类型与接口 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text"> Core Animation </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.1.</span> <span class="nav-text"> OSX和iOS提供的合成及动画相关框架，封装了OpenGL和OpenGL ES功能基于Objective-C的类，能够在视频编辑和播放中添加动画与图片效果 </span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text"> 解析AV Foundation </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text"> 音频播放与记录 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text"> AVAudioPlayer和AVAudioRecorder提供简单的整合音频播放和记录的功能 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text"> 媒体文件检查 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 提供检查正在使用的媒体文件功能，可以查看这些媒体资源来确定是否适合一些特定的任务，比如是否可以用于回收或者被编辑与导出。还可以获取该媒体资源相关技术参数，比如创建时间，内容持续时间或首选播放音量 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text"> 视频播放 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 提供视频播放功能，让你播放本地文件或者远程流中获取视频资源，并对视频播放和内容的展示进行控制。核心是AVPlayer和AVPlayerItem，这两个类让你对资源的播放进行控制 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text"> 媒体捕捉 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.1.</span> <span class="nav-text"> 提供对iOS和MAC设备进行精密控制的功能。摄像头捕捉核心类是AVCaptureSession，他是接受摄像头设备由各路流发来的电影和图片的汇集点 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text"> 媒体编辑 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.1.</span> <span class="nav-text"> 提供对媒体资源的整合和编辑的功能。允许修改和编辑独立的媒体片段、随时修改音频文件的参数以及添加动画标题和场景切换效果 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.</span> <span class="nav-text"> 媒体处理 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.1.</span> <span class="nav-text"> 提供直接访问视频帧和音频样本功能，当需要执行更高级的媒体处理任务时，可以使用AVAssetReader和AVAssetWriter来实现这些功能 </span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萌萌哒iOS工程师刘梓颖</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
