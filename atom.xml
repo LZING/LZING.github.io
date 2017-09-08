@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-08T07:11:05.000Z</updated>
+  <updated>2016-11-10T09:49:17.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,114 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/09/08/video/"/>
-    <id>http://yoursite.com/2017/09/08/video/</id>
-    <published>2017-09-08T07:11:05.000Z</published>
-    <updated>2017-09-08T07:11:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>监控管理</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
-    <style type="text/css">
-      html,body{width:100%;padding:0;margin:0;}
-      table{width:95%;display:block;padding:0;margin:0;}
-      video{border:1px solid #000;background:#000;}
-      .my_box{position:relative;}
-      .box{position:absolute;top:5px;left:5px;color:#fff;}
-    </style>
-  </head>
-  <body>
-    <table>
-      <tbody>
-        <tr>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-        </tr>
-        <tr>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-        </tr>
-        <tr>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-        </tr>
-        <tr>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-          <td class="my_box"></td>
-        </tr>
-      </tbody>
-    </table>
-    <script type="text/javascript" src="http://wap.xiaoyoo.net/application/manage/views/js/jquery-1.7.2.min.js"></script>
-    <link href="http://wap.xiaoyoo.net/application/manage/views/live_video/js_css/video-js.css" rel="stylesheet">
-    <script src="http://wap.xiaoyoo.net/application/manage/views/live_video/js_css/videojs-ie8.min.js"></script>
-    <script src="http://wap.xiaoyoo.net/application/manage/views/live_video/js_css/video.js"></script>
-    <script type="text/javascript">
-      $(function(){
-          var video = [
-          'rtmp://7098.liveplay.myqcloud.com/live/z1.123',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/149929224577776',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501226713219617',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1499738887111799',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1499738887111799',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1500869044192741',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          'rtmp://live-rtmpnetcenter.xiaoyoo.net/live/1501323938226605',
-          ];
-          var myPlayer;
-          for(var i in video){
-            $('td.my_box').eq(i).html("<video id='my"+i+"' class='video-js' controls muted width='480' height='270' poster='http://vimg.xiaoyoo.net/a54faa8ba1526db8c521fdf3e738c7b6?20170821233551'>\n\
-                <source src='"+video[i]+"' type='rtmp/flv'>\n\
-                <\/video><div class='box'>视频"+(i*1+1)+"<\/div>");
-            myPlayer = videojs('my'+i);
-            videojs("my"+i).ready(function(){
-                var myPlayer = this;
-                myPlayer.play();
-                myPlayer.volume(0);
-                })
-          }
-      });
-    </script>
-  </body>
-</html>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;title&gt;监控管理&lt;/title&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>iOS AVFoundation入门</title>
